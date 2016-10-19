@@ -21,26 +21,16 @@ public class boxer : MonoBehaviour {
     public int detection;   // 0 continuous dynamic         1 like a boxer
     public Text display;
     private float dist;
-    //	private Vector3 lastpos;
-    //	private Vector3 lastvel;
-    //	private Vector3 lastanvel;
 
     // Use this for initialization
     void Start () {
 		isTargetOn = true;
         dist = 0;
-       // File.WriteAllText("./exp2/report.txt","");//clear all
 		hasEntered=false;
         hasHit = false;
 	
 	}
 
-//	void FixedUpdate(){
-//		lastpos = this.gameObject.transform.position;
-//		lastvel = this.gameObject.GetComponent<Rigidbody> ().velocity;
-//		lastanvel = this.gameObject.GetComponent<Rigidbody> ().angularVelocity;
-//	}
-	// Update is called once per frame
 	void Update () {
         if (count < 51)
         {
@@ -72,8 +62,6 @@ public class boxer : MonoBehaviour {
 			
 			timer = Time.time + 1.5;
 			ang_col = col.contacts [0].normal;
-            //print ("angle_collision:"+ang_col.ToString());
-           // this.gameObject.GetComponent<Rigidbody>().AddForce(ang_col * 2, ForceMode.Impulse);
             if (detection == 1)
             {
                 enter_speed = col.gameObject.GetComponent<Rigidbody>().GetPointVelocity(this.gameObject.GetComponent<SphereCollider>().center).magnitude;
@@ -91,7 +79,6 @@ public class boxer : MonoBehaviour {
 			print(contact.point+" trial: "+count);
 			dist = Vector3.Distance (contact.point, col.gameObject.transform.position);
             print(dist);
-			//File.AppendAllText("./exp2/report.txt",dist.ToString()+"\n");
 			isTargetOn = false;
             hasHit = false;
 			count++;
@@ -107,7 +94,6 @@ public class boxer : MonoBehaviour {
 				if (speed_a > speed_b && current_speed > speed_b) {
                     ang_boxer = col.contacts [0].normal;
                     print(speed_a + " " + speed_b + " " + current_speed);
-                   // this.gameObject.GetComponent<Rigidbody> ().AddForce (ang_boxer*2, ForceMode.Impulse); //determine the directtion of ball! ang_col? ang_boxer? XXXXXXXXXXXXX hand.normal
                     hasHit = true;
 					hasEntered = false;
 				} 
